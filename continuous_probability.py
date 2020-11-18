@@ -52,14 +52,14 @@ def normal_probability(sample, mean, stddev):
     x = [i for i in range(mean - 3 * stddev, mean + 3 * stddev)]
     z = []
     for i in x:
-        x.append(standardize(i, mean, stddev))
+        x.append(standardize(i, mean, stddev)) # Memory error
 
     y = []
     for i in z:
         y.append(nrbin_prob(sample, i, success))
 
-    # plt.bar(x, y)
-    # plt.show()
+    plt.bar(x, y)
+    plt.show()
     return x, y
 
 #print(valid_normal_approx(400, 0.428))
