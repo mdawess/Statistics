@@ -1,5 +1,8 @@
 import math
 from matplotlib import pyplot as plt
+from scipy.integrate import quad
+import numpy as np
+import pandas as pd
 
 def valid_normal_approx(sample, success):
     condition1 = False
@@ -45,23 +48,113 @@ def standardize(value, mean, stddev):
 
     return z
 
-def normal_probability(sample, mean, stddev):
-    """Plots a normal density curve and denotes the location of the point we are trying to
-    find the probability of."""
-    success = mean/sample
-    x = [i for i in range(mean - 3 * stddev, mean + 3 * stddev)]
-    z = []
-    for i in x:
-        x.append(standardize(i, mean, stddev)) # Memory error
+def normalProbabilityDensity(x):
+    """Integrates the normal probability curve and finds the area under the
+    curve less than x."""
+    constant = 1.0 / np.sqrt(2*np.pi)
 
-    y = []
-    for i in z:
-        y.append(nrbin_prob(sample, i, success))
+    return(constant * np.exp((-x**2) / 2.0))
 
-    plt.bar(x, y)
+def continuity_correction(action, value):
+    """Applies a continuity correction based on whether you are looking to
+    find the proportion GREATER than or LESS than the inputted value."""
+
+    if action == "GREATER".lower():
+        value -= 0.5
+
+    elif action == "LESS".lower():
+        value += 0.5
+
+    else:
+        print('Please enter either GREATER or LESS')
+
+    return value
+
+# Main functions for class
+def normal_probability_proportions(p_hat, n, p, cc=False, greater=False):
+
+    """Plots a normal density curve and denotes the location of the value we are trying to
+    find the probability of. Note: The probability is initially set to show the probability it is 
+    LESS THAN value and not include a continuity correction
+    Code base: https://towardsdatascience.com/how-to-use-and-create-a-z-table-standard-normal-table-240e21f36e53
+    """
+    
+    mean = n * p
+    var = n * p * (1 - p)
+    stddev = var ** 0.5
+    value = p_hat * n
+    if cc == True:
+        if greater == False:
+            value = continuity_correction("less", value)
+
+        elif greater == True:
+            value = continuity_correction("greater", value)
+
+    minimum = standardize(mean - 3 * stddev, mean, stddev)
+    maximum = standardize(mean + 3 * stddev, mean, stddev)
+    
+    value = round(standardize(value, mean, stddev), 2)
+
+    x = np.linspace(minimum, maximum, num = 100)
+    constant = 1.0 / np.sqrt(2*np.pi)
+    pdf_normal_distribution = constant * np.exp((-x**2) / 2.0)
+    fig, ax = plt.subplots(figsize=(10, 5))
+    ax.plot(x, pdf_normal_distribution)
+    ax.set_ylim(0)
+    ax.set_title('Normal Distribution', size = 20)
+    ax.set_ylabel('Probability Density', size = 20)
+
+    plt.plot([value, value], [0, 0.30], color='red', linestyle='-')
+    x = round(quad(normalProbabilityDensity, np.NINF, value)[0], 4)
+    if greater == False:
+        x = round(0.5 - (1 - x - 0.5))
+        plt.text(value, 0.33, str(x))
+    elif greater == True:
+        x = round(1 - x, 4)
+        plt.text(value, 0.33, str(x))
     plt.show()
-    return x, y
 
-#print(valid_normal_approx(400, 0.428))
-# print(nrfactorial(20))
-print(normal_probability(100, 458, 5)[0])
+def normal_probability_given(target, mean, stddev, cc=False, greater=False):
+    """Plots a normal density curve and denotes the location of the value we are trying to
+    find the probability of. Note: The probability is initially set to show the probability it is 
+    LESS THAN value and not include a continuity correction"""
+    
+    mean = mean
+    stddev = stddev
+    value = target
+
+    if cc == True:
+        if greater == False:
+            value = continuity_correction("less", value)
+
+        elif greater == True:
+            value = continuity_correction("greater", value)
+
+    minimum = standardize(mean - 3 * stddev, mean, stddev)
+    maximum = standardize(mean + 3 * stddev, mean, stddev)
+    
+    value = round(standardize(value, mean, stddev), 2)
+
+    x = np.linspace(minimum, maximum, num = 100)
+    constant = 1.0 / np.sqrt(2*np.pi)
+    pdf_normal_distribution = constant * np.exp((-x**2) / 2.0)
+    fig, ax = plt.subplots(figsize=(10, 5))
+    ax.plot(x, pdf_normal_distribution)
+    ax.set_ylim(0)
+    ax.set_title('Normal Distribution', size = 20)
+    ax.set_ylabel('Probability Density', size = 20)
+
+    plt.plot([value, value], [0, 0.30], color='red', linestyle='-')
+    x = round(quad(normalProbabilityDensity, np.NINF, value)[0], 4)
+    if greater == False:
+        x = round(0.5 - (1 - x - 0.5), 4)
+        plt.text(value, 0.33, str(x))
+    elif greater == True:
+        x = round(1 - x, 4)
+        plt.text(value, 0.33, str(x))
+    plt.show()
+
+"""Loaded Functions"""
+# normal_probability_proportions(0.6, 200, 0.55, True, True)
+normal_probability_given(56, 62.5, 4.841, True)
+

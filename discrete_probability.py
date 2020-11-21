@@ -39,8 +39,6 @@ def binomial_distribution(sample, success):
     """
 
     y = []
-    #if len(y) == 0:
-        #y.append(binomial_probability(sample, 0, success))
     for i in range(0, sample + 1):
         y.append(binomial_probability(sample, i, success))
 
@@ -49,8 +47,6 @@ def binomial_distribution(sample, success):
         x.append(i)
 
     plt.bar(x, y)
-    # for i, v in enumerate(y):
-    #     plt.text(v + 3, i + .25, str(v), color='blue', fontweight='bold')
     if sample < 20:
         for i in range(len(x)):
             plt.text(x[i], y[i] + 0.01, str(y[i]), color='black', rotation=45)
@@ -82,20 +78,20 @@ def discrete_distribution(values, probablities):
     plt.xticks(values)
     
     # Uncomment to view the standardized plot
-    # plt.bar(standardized, probablities)
-    # plt.title("Standardized Plot")
+    plt.bar(standardized, probablities)
+    plt.title("Standardized Plot")
     plt.show()
     return None
 
 y = binomial_probability(1400, 868, 0.65)
 x = binomial_prob_greater_than(25, 5, 0.12)
-#z = binomial_distribution(10, 0.60)
-print(y)
+z = binomial_distribution(10, 0.60)
+# print(y)
 
-values = [0.99, 1.99, 2.99, 3.99, 4.99]
-probablities = [0.4823, 0.3858, 0.1157, 0.0154, 0.0008]
-#k = discrete_distribution(values, probablities)
-#print(k)
+# values = [0.99, 1.99, 2.99, 3.99, 4.99]
+# probablities = [0.4823, 0.3858, 0.1157, 0.0154, 0.0008]
+# k = discrete_distribution(values, probablities)
+
 
 
 
