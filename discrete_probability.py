@@ -3,11 +3,19 @@ from matplotlib import pyplot as plt
 import math
 
 def factorial(n):
-   if n < 1:   # base case
-       return 1
-   else:
-       returnNumber = n * factorial(n - 1)  # recursive call
-       return returnNumber
+    r = 1
+    i = 2
+    while i <= n:
+        # Use shorter version
+        r *= i
+        i += 1
+    return r
+
+#    if n < 1:   # base case
+#        return 1
+#    else:
+#        returnNumber = n * factorial(n - 1)  # recursive call
+#        return returnNumber
 
 def binomial_probability(sample, num, success):
     """Calculates the binomial probability for a single occurance. 
@@ -15,7 +23,7 @@ def binomial_probability(sample, num, success):
     looking to find the probability of occurance for and success 
     is the probability of success (p)."""
 
-    term1 = factorial(sample)/(factorial(num)*factorial(sample - num))
+    term1 = int(factorial(sample)/(factorial(num)*factorial(sample - num)))
     term2 = success ** num
     term3 = (1 - success) ** (sample - num)
     prob = term1 * term2 * term3
@@ -86,8 +94,8 @@ def discrete_distribution(values, probablities):
 
 y = binomial_probability(1400, 868, 0.65)
 x = binomial_prob_greater_than(25, 5, 0.12)
-#z = binomial_distribution(10, 0.60)
-print(y)
+z = binomial_distribution(10, 0.60)
+# print(y)
 
 # values = [0.99, 1.99, 2.99, 3.99, 4.99]
 # probablities = [0.4823, 0.3858, 0.1157, 0.0154, 0.0008]

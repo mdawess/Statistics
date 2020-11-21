@@ -71,6 +71,10 @@ def continuity_correction(action, value):
     return value
 
 # Main functions for class
+"""
+To do:
+1. Add a check to see if normal approx is valid
+"""
 def normal_probability_proportions(p_hat, n, p, cc=False, greater=False):
 
     """Plots a normal density curve and denotes the location of the value we are trying to
