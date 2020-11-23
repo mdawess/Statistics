@@ -160,5 +160,5 @@ def normal_probability_given(target, mean, stddev, cc=False, greater=False):
 
 """Loaded Functions"""
 # normal_probability_proportions(0.6, 200, 0.55, True, True)
-normal_probability_given(56, 62.5, 4.841, True)
+# normal_probability_given(56, 62.5, 4.841, True)
 
