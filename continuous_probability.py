@@ -105,17 +105,19 @@ def normal_probability_proportions(p_hat, n, p, cc=False, greater=False):
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.plot(x, pdf_normal_distribution)
     ax.set_ylim(0)
-    ax.set_title('Normal Distribution', size = 20)
-    ax.set_ylabel('Probability Density', size = 20)
+    ax.set_title('Normal Distribution, mean= '+str(mean)+', stddev= '+str(round(stddev, 3)), size = 20)
+    ax.set_ylabel('Probability Density' , size = 20)
 
     plt.plot([value, value], [0, 0.30], color='red', linestyle='-')
     x = round(quad(normalProbabilityDensity, np.NINF, value)[0], 4)
     if greater == False:
-        x = round(0.5 - (1 - x - 0.5))
+        x = round(0.5 - (1 - x - 0.5), 4)
         plt.text(value, 0.33, str(x))
     elif greater == True:
         x = round(1 - x, 4)
         plt.text(value, 0.33, str(x))
+        
+    
     plt.show()
 
 def normal_probability_given(target, mean, stddev, cc=False, greater=False):
@@ -145,7 +147,7 @@ def normal_probability_given(target, mean, stddev, cc=False, greater=False):
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.plot(x, pdf_normal_distribution)
     ax.set_ylim(0)
-    ax.set_title('Normal Distribution', size = 20)
+    ax.set_title('Normal Distribution, mean= '+str(mean)+', stddev= '+str(stddev), size = 20)
     ax.set_ylabel('Probability Density', size = 20)
 
     plt.plot([value, value], [0, 0.30], color='red', linestyle='-')
@@ -156,9 +158,10 @@ def normal_probability_given(target, mean, stddev, cc=False, greater=False):
     elif greater == True:
         x = round(1 - x, 4)
         plt.text(value, 0.33, str(x))
+    
     plt.show()
-
+    
 """Loaded Functions"""
-# normal_probability_proportions(0.6, 200, 0.55, True, True)
-# normal_probability_given(56, 62.5, 4.841, True)
+# x = normal_probability_proportions(0.6, 200, 0.55,False, True)
+# normal_probability_given(300, 400, 0.0521)
 
