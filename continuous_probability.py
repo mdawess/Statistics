@@ -98,7 +98,7 @@ def normal_probability_proportions(p_hat, n, p, cc=False, greater=False):
     maximum = standardize(mean + 3 * stddev, mean, stddev)
     
     value = round(standardize(value, mean, stddev), 2)
-
+    print(value)
     x = np.linspace(minimum, maximum, num = 100)
     constant = 1.0 / np.sqrt(2*np.pi)
     pdf_normal_distribution = constant * np.exp((-x**2) / 2.0)
@@ -107,7 +107,7 @@ def normal_probability_proportions(p_hat, n, p, cc=False, greater=False):
     ax.set_ylim(0)
     ax.set_title('Normal Distribution, mean= '+str(mean)+', stddev= '+str(round(stddev, 3)), size = 20)
     ax.set_ylabel('Probability Density' , size = 20)
-
+    
     plt.plot([value, value], [0, 0.30], color='red', linestyle='-')
     x = round(quad(normalProbabilityDensity, np.NINF, value)[0], 4)
     if greater == False:
@@ -162,6 +162,6 @@ def normal_probability_given(target, mean, stddev, cc=False, greater=False):
     plt.show()
     
 """Loaded Functions"""
-# x = normal_probability_proportions(0.6, 200, 0.55,False, True)
+x = normal_probability_proportions(0.375, 40, 0.35, True)
 # normal_probability_given(300, 400, 0.0521)
 

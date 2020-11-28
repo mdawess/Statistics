@@ -100,8 +100,8 @@ def between(value1, value2, n, p):
     
     plt.show()
 
-binomial_sample_distribution(40, 0.0521)
+#binomial_sample_distribution(40, 0.0521)
 #x = greater_or_equal(36, 2/36, 0.041) 
-# y = less_or_equal(40, 0.025, 0.0521)
-# # # z = between(0.04, 0.06, 400, 0.0521)
-# print(y)   
+# y = less_or_equal(8, 0.75, 0.92)
+# z = between(0.7, 0.72, 602, 0.694)
+# print(y)
