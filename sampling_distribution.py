@@ -100,8 +100,42 @@ def between(value1, value2, n, p):
     
     plt.show()
 
+def between_meanstddev(value1, value2, mew, stddev):
+
+    """Plots a normal density curve and denotes the location of the value we are trying to
+    find the probability of. Note: The probability is initially set to show the probability it is 
+    LESS THAN value and not include a continuity correction
+    Code base: https://towardsdatascience.com/how-to-use-and-create-a-z-table-standard-normal-table-240e21f36e53
+    """
+    
+    mean = mew
+    stddev = stddev
+
+    minimum = standardize(mean - 3 * stddev, mean, stddev)
+    maximum = standardize(mean + 3 * stddev, mean, stddev)
+    
+    value1 = round(standardize(value1, mean, stddev), 2)
+    value2 = round(standardize(value2, mean, stddev), 2)
+
+    x = np.linspace(minimum, maximum, num = 100)
+    constant = 1.0 / np.sqrt(2*np.pi)
+    pdf_normal_distribution = constant * np.exp((-x**2) / 2.0)
+    fig, ax = plt.subplots(figsize=(10, 5))
+    ax.plot(x, pdf_normal_distribution)
+    ax.set_ylim(0)
+    ax.set_title('Normal Distribution', size = 20)
+    ax.set_ylabel('Probability Density', size = 20)
+
+    plt.plot([value1, value1], [0, 0.35], color='red', linestyle='-')
+    plt.plot([value2, value2], [0, 0.35], color='red', linestyle='-')
+    v1 = round(quad(normalProbabilityDensity, np.NINF, value1)[0], 4)
+    v2 = round(quad(normalProbabilityDensity, np.NINF, value2)[0], 4)
+    plt.text((value1 + value2) / 2, 0.2, "Area between = " + str((0.5-v1)+(v2-0.5)))
+    
+    plt.show()
 #binomial_sample_distribution(40, 0.0521)
 #x = greater_or_equal(36, 2/36, 0.041) 
 # y = less_or_equal(8, 0.75, 0.92)
-# z = between(0.7, 0.72, 602, 0.694)
+# z = between(2400, 3900, 3301, 0.694)
+m = between_meanstddev(2400, 3900, 3301, 512)
 # print(y)
