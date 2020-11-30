@@ -133,9 +133,10 @@ def between_meanstddev(value1, value2, mew, stddev):
     plt.text((value1 + value2) / 2, 0.2, "Area between = " + str((0.5-v1)+(v2-0.5)))
     
     plt.show()
+
 #binomial_sample_distribution(40, 0.0521)
 #x = greater_or_equal(36, 2/36, 0.041) 
-# y = less_or_equal(8, 0.75, 0.92)
+# y = less_or_equal(54, 7.91, 8.29)
 # z = between(2400, 3900, 3301, 0.694)
-m = between_meanstddev(2400, 3900, 3301, 512)
+# m = between_meanstddev(2400, 3900, 3301, 512)
 # print(y)
