@@ -134,9 +134,9 @@ def between_meanstddev(value1, value2, mew, stddev):
     
     plt.show()
 
-#binomial_sample_distribution(40, 0.0521)
+# binomial_sample_distribution(40, 0.0521)
 #x = greater_or_equal(36, 2/36, 0.041) 
-# y = less_or_equal(54, 7.91, 8.29)
-# z = between(2400, 3900, 3301, 0.694)
+# y = less_or_equal(40, 0.05, 0.0521)
+# z = between(0.5, 0.7, 2000, 0.6)
 # m = between_meanstddev(2400, 3900, 3301, 512)
 # print(y)

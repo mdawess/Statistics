@@ -85,11 +85,11 @@ def discrete_distribution(values, probablities):
     plt.show()
     return None
 
-# y = binomial_probability(1400, 868, 0.65)
-#x = binomial_prob_greater_than(36, 2/36, 0.041)
+# x = binomial_probability(20, 20, 0.85)
+# x = binomial_prob_greater_than(3, 1/3, 0.42278)
 # z = binomial_distribution(40, 0.0521)
 # print(x)
 
 # values = [0, 1, 2]
-# probablities = [0.4, 0.4, 0.2]
+# probablities = [0.4, 0.5, 0.1]
 # k = discrete_distribution(values, probablities)
